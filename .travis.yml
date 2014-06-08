@@ -10,3 +10,5 @@ script:
     - coverage run --source=serename setup.py test
 after_success:
     - coveralls
+notifications:
+    email: false
