@@ -13,12 +13,11 @@ class TestScanner(TestCase):
     def test_remove_filename_extensions(self):
         self.assertTrue(self.scanner.remove_filename_extensions(), "Yay!")
 
-
     def tearDown(self):
         pass
 
 
 def suite():
-    suite = TestSuite()
-    suite.addTest(TestLoader().loadTestsFromTestCase(TestScanner))
-    return suite
+    test_suite = TestSuite()
+    test_suite.addTest(TestLoader().loadTestsFromTestCase(TestScanner))
+    return test_suite
