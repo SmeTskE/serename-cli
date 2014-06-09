@@ -1,3 +1,5 @@
+import os
+
 class Scanner:
 
     def __init__(self):
@@ -16,4 +18,5 @@ class Scanner:
         return filename
 
     def scan_directory(self, directory):
-        return False
+        return os.listdir(directory)
+
