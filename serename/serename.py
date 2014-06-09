@@ -1,6 +1,7 @@
-
-
 class Serename:
+
+    def __init__(self):
+        pass
 
     def generate_xml(self):
         pass
@@ -14,10 +15,11 @@ def main(args):
     serename = Serename()
     if args["generate"]:
         serename.generate_xml()
-    elif input_file != None:
+    elif input_file is not None:
         serename.rename_files(input_file)
 
 
 if __name__ == "__main__":
+    #TODO: Use argparse
     args = {"generate": True, "input_file": None}
     main(args)
