@@ -21,5 +21,5 @@ def main(args):
 
 if __name__ == "__main__":
     #TODO: Use argparse
-    args = {"generate": True, "input_file": None}
-    main(args)
+    arguments = {"generate": True, "input_file": None}
+    main(arguments)

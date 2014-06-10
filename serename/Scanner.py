@@ -1,11 +1,15 @@
 import os
+from episode import Episode
+
 
 class Scanner:
 
-    def __init__(self):
+    def __init__(self, directory):
+        self.directory = directory
         pass
 
-    def remove_filename_extension(self, f):
+    @staticmethod
+    def remove_filename_extension(f):
         filename = ""
         if f[-4:].lower() in [".avi", ".mp4", ".mkv"]:
             filename = f[0:-4]
@@ -14,9 +18,24 @@ class Scanner:
                 filename = f[0:-7]
             else:
                 filename = f[0:-4]
-
         return filename
 
-    def scan_directory(self, directory):
-        return os.listdir(directory)
+    def get_files(self):
+        return os.listdir(self.directory)
 
+    def get_episodes(self):
+        file_names = self.get_files()
+        episodes = {}
+        for file_name in file_names:
+            episode_name = Scanner.remove_filename_extension(file_name)
+            episode = episodes.get(episode_name)
+            if episode is None:
+                episode = Episode({
+                    "name": episode_name,
+                    "files": [file_name]
+                })
+            else:
+                episode.files.append(file_name)
+                episode.files.sort()
+            episodes[episode_name] = episode
+        return episodes

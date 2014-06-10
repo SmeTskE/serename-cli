@@ -1,4 +1,4 @@
-from serename.Scanner import Scanner
+from serename.scanner import Scanner
 from serename.test import testutil
 from unittest import TestCase
 from unittest import TestSuite
@@ -11,7 +11,8 @@ class TestScanner(TestCase):
         testutil.create_tmp_dir()
         testutil.create_tmp_episodes()
         testutil.create_tmp_episodes_extensions()
-        self.scanner = Scanner()
+        self.scanner = Scanner(testutil.TEST_DIR)
+        self.maxDiff = None
         pass
 
     def tearDown(self):
@@ -19,45 +20,53 @@ class TestScanner(TestCase):
         pass
 
     def test_remove_filename_extension_avi(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["avi"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["avi"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
     def test_remove_filename_extension_mkv(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["mkv"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["mkv"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
     def test_remove_filename_extension_mp4(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["mp4"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["mp4"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
     def test_remove_filename_extension_langsrt(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["langsrt"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["langsrt"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
     def test_remove_filename_extension_srt(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["srt"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["srt"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
     def test_remove_filename_extension_langsub(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["langsub"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["langsub"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
     def test_remove_filename_extension_sub(self):
-        result = self.scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["sub"])
+        result = Scanner.remove_filename_extension(testutil.EPISODES_EXTENSIONS["sub"])
         expected = testutil.EPISODES_EXTENSIONS_EXPECTED[0]
         self.assertEqual(result, expected, "Got: " + result + ", Expected: " + expected)
 
-    def test_scan_directory(self):
-        files_in_dir = self.scanner.scan_directory(testutil.TEST_DIR)
+    def test_get_files(self):
+        files_in_dir = self.scanner.get_files()
         files_expected = testutil.get_expected_files()
         self.assertItemsEqual(files_in_dir, files_expected)
-        pass
+
+    def test_get_episodes(self):
+        episodes_in_dir = self.scanner.get_episodes()
+        episodes_in_dir_expected = testutil.get_expected_episodes()
+
+        print episodes_in_dir
+        print episodes_in_dir_expected
+
+        self.assertDictEqual(episodes_in_dir, episodes_in_dir_expected)
 
 
 def suite():
