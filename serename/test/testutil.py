@@ -43,15 +43,13 @@ def create_tmp_episodes():
         tmp_file_path = os.path.join(TEST_DIR, value)
         tmp_file = open(tmp_file_path, 'w+')
         tmp_file.write(value)
-    pass
 
 
 def create_tmp_episodes_extensions():
     for key, value in EPISODES_EXTENSIONS.iteritems():
-        tmp_file_path = os.path.join(TEST_DIR, value[0])
+        tmp_file_path = os.path.join(TEST_DIR, value)
         tmp_file = open(tmp_file_path, 'w+')
-        tmp_file.write(value[0])
-    pass
+        tmp_file.write(value)
 
 
 def remove_tmp_dir():
