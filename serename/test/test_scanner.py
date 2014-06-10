@@ -1,6 +1,3 @@
-import os
-import shutil
-
 from serename.Scanner import Scanner
 from serename.test import testutil
 from unittest import TestCase
