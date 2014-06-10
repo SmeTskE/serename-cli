@@ -62,10 +62,6 @@ class TestScanner(TestCase):
     def test_get_episodes(self):
         episodes_in_dir = self.scanner.get_episodes()
         episodes_in_dir_expected = testutil.get_expected_episodes()
-
-        print episodes_in_dir
-        print episodes_in_dir_expected
-
         self.assertDictEqual(episodes_in_dir, episodes_in_dir_expected)
 
 
