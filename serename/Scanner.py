@@ -1,5 +1,4 @@
 import os
-from episode import Episode
 
 
 class Scanner:
@@ -30,7 +29,7 @@ class Scanner:
             episode_name = Scanner.remove_filename_extension(file_name)
             episode = episodes.get(episode_name)
             if episode is None:
-                episode = Episode({
+                episode = episode.Episode({
                     "name": episode_name,
                     "files": [file_name]
                 })
