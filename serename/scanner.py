@@ -28,14 +28,14 @@ class Scanner:
         episodes = {}
         for file_name in file_names:
             episode_name = Scanner.remove_filename_extension(file_name)
-            episode = episodes.get(episode_name)
-            if episode is None:
-                episode = Episode({
+            __episode = episodes.get(episode_name)
+            if __episode is None:
+                __episode = Episode({
                     "name": episode_name,
                     "files": [file_name]
                 })
             else:
-                episode.files.append(file_name)
-                episode.files.sort()
-            episodes[episode_name] = episode
+                __episode.files.append(file_name)
+                __episode.files.sort()
+            episodes[episode_name] = __episode
         return episodes
