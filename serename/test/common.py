@@ -2,7 +2,7 @@ import os
 import shutil
 from serename.episode import Episode
 
-TEST_DIR = "test_data"
+TEMP_DIR = "temp_data"
 
 
 EPISODES_FILES = [
@@ -37,25 +37,25 @@ EPISODES_EXTENSIONS_EXPECTED = [
 
 
 def create_tmp_dir():
-    os.mkdir(TEST_DIR)
+    os.mkdir(TEMP_DIR)
 
 
 def create_tmp_episodes():
     for value in EPISODES_FILES:
-        tmp_file_path = os.path.join(TEST_DIR, value)
+        tmp_file_path = os.path.join(TEMP_DIR, value)
         tmp_file = open(tmp_file_path, 'w+')
         tmp_file.write(value)
 
 
 def create_tmp_episodes_extensions():
     for key, value in EPISODES_EXTENSIONS.iteritems():
-        tmp_file_path = os.path.join(TEST_DIR, value)
+        tmp_file_path = os.path.join(TEMP_DIR, value)
         tmp_file = open(tmp_file_path, 'w+')
         tmp_file.write(value)
 
 
 def remove_tmp_dir():
-    shutil.rmtree(TEST_DIR)
+    shutil.rmtree(TEMP_DIR)
 
 
 def get_expected_files_extensions():
