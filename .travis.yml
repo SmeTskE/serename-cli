@@ -5,6 +5,7 @@ python:
     - 3.3
 install:
     - pip install -r requirements.txt
+    - pip install serename
     - pip install coveralls
 script:
     - coverage run --source=serename setup.py test
