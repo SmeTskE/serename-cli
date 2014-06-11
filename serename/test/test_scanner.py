@@ -1,5 +1,5 @@
 from serename.scanner import Scanner
-from serename.test import testutil
+from . import testutil
 from unittest import TestCase
 from unittest import TestSuite
 from unittest import TestLoader
