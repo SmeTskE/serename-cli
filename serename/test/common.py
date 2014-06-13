@@ -48,7 +48,7 @@ def create_tmp_episodes():
 
 
 def create_tmp_episodes_extensions():
-    for key, value in EPISODES_EXTENSIONS.iteritems():
+    for key, value in EPISODES_EXTENSIONS.items():
         tmp_file_path = os.path.join(TEMP_DIR, value)
         tmp_file = open(tmp_file_path, 'w+')
         tmp_file.write(value)
@@ -60,14 +60,14 @@ def remove_tmp_dir():
 
 def get_expected_files_extensions():
     files_expected = []
-    for key, value in EPISODES_EXTENSIONS.iteritems():
+    for key, value in EPISODES_EXTENSIONS.items():
         files_expected.append(value)
     return files_expected
 
 
 def get_expected_files():
     expected_files = []
-    for key, value in EPISODES_EXTENSIONS.iteritems():
+    for key, value in EPISODES_EXTENSIONS.items():
         expected_files.append(value)
     for value in EPISODES_FILES:
         expected_files.append(value)

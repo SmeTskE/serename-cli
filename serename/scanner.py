@@ -1,5 +1,5 @@
 import os
-from episode import Episode
+from serename.episode import Episode
 
 
 class Scanner:

@@ -3,7 +3,7 @@ from unittest import TestCase
 from unittest import TestSuite
 from unittest import TestLoader
 
-import common
+from serename.test import common
 
 
 class TestScanner(TestCase):
@@ -58,7 +58,7 @@ class TestScanner(TestCase):
     def test_get_files(self):
         files_in_dir = self.scanner.get_files()
         files_expected = common.get_expected_files()
-        self.assertItemsEqual(files_in_dir, files_expected)
+        self.assertListEqual(sorted(files_in_dir), sorted(files_expected))
 
     def test_get_episodes(self):
         episodes_in_dir = self.scanner.get_episodes()
