@@ -1,12 +1,15 @@
+#!/usr/bin/env python3
 class Serename:
 
     def __init__(self):
         pass
 
     def generate_xml(self):
+
         pass
 
     def rename_files(self, input_file):
+
         pass
 
 

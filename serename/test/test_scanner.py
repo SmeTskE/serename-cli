@@ -1,7 +1,5 @@
 from serename.scanner import Scanner
 from unittest import TestCase
-from unittest import TestSuite
-from unittest import TestLoader
 
 from serename.test import common
 
@@ -65,8 +63,10 @@ class TestScanner(TestCase):
         episodes_in_dir_expected = common.get_expected_episodes()
         self.assertDictEqual(episodes_in_dir, episodes_in_dir_expected)
 
+    def test_file_hash(self):
+        self.assertTrue(False)
+        pass
 
-def suite():
-    test_suite = TestSuite()
-    test_suite.addTest(TestLoader().loadTestsFromTestCase(TestScanner))
-    return test_suite
+    def test_filename_hash(self):
+        self.assertTrue(False)
+        pass
