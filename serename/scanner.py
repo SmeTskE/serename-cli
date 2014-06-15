@@ -1,3 +1,5 @@
+from functools import partial
+import hashlib
 import os
 from serename.episode import Episode
 
@@ -7,6 +9,22 @@ class Scanner:
     def __init__(self, directory):
         self.directory = directory
         pass
+
+    @staticmethod
+    def get_file_hash(filename):
+        result = ""
+        md5 = hashlib.md5()
+        with open(filename,'rb') as f:
+            for chunk in iter(lambda: f.read(md5.block_size), b''):
+                md5.update(chunk)
+            result = md5.hexdigest()
+        return result
+
+
+
+    @staticmethod
+    def get_filename_hash(file_name):
+        return hashlib.md5(file_name.encode('utf-8')).hexdigest()
 
     @staticmethod
     def remove_filename_extension(f):

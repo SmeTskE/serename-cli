@@ -3,6 +3,8 @@ from unittest import TestCase
 
 from serename.test import common
 
+import os
+
 
 class TestScanner(TestCase):
 
@@ -64,9 +66,15 @@ class TestScanner(TestCase):
         self.assertDictEqual(episodes_in_dir, episodes_in_dir_expected)
 
     def test_file_hash(self):
-        self.assertTrue(False)
-        pass
+        episode = common.EPISODES[0].files[0]
+        filename = os.path.join(common.TEMP_DIR_EPISODES, episode["file_name"])
+        result = self.scanner.get_file_hash(filename)
+        expected_result = episode["content_md5"]
+        self.assertEqual(result, expected_result)
 
     def test_filename_hash(self):
-        self.assertTrue(False)
-        pass
+        episode = common.EPISODES[0].files[0]
+        filename = episode["file_name"]
+        result = self.scanner.get_filename_hash(filename)
+        expected_result = episode["filename_md5"]
+        self.assertEqual(result, expected_result)

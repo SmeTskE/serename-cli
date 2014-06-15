@@ -1,35 +1,25 @@
 class Episode:
 
     def __init__(self, data=None):
-        print(str(data))
         self.name = ""
         self.files = []
+        self.series = ""
+        self.episode_nr = 0
+        self.episode_title = ""
+        self.season_nr = 0
         if data is not None:
             if data.get("name") is not None:
                 self.name = data["name"]
             if data.get("files") is not None:
                 self.files = data["files"]
-        pass
+            if data.get("series") is not None:
+                self.series = data["series"]
+            if data.get("episode_nr") is not None:
+                self.episode_nr = data["episode_nr"]
+            if data.get("episode_title") is not None:
+                self.episode_title = data["episode_title"]
+            if data.get("season_nr") is not None:
+                self.season_nr = data["season_nr"]
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__ and self.files.sort() == other.files.sort()
-
-    def add_file(self, file):
-        self.files.append(file)
-
-    def add_files(self, files):
-        for f in files.items():
-            if f not in files.items():
-                self.files.add(f)
-
-    def get_name(self):
-        return self.name
-
-    def get_files(self):
-        return self.files
-
-    def set_files(self, files):
-        self.files = files
-
-    def set_name(self, name):
-        self.name = name

@@ -47,19 +47,19 @@ EPISODES = [
                 "file_name": "The.Walking.Dead.S03E01.x264-2HD.[VTV].mp4",
                 "filename_md5": "5931726081fb60cacf0ddd1aea79c9cc",
                 "content_md5": "243923cfc116b2bc5456b30acf2e9ebe",
-                "dummy_content": "This is episode 01 - Seed"
+                "dummy_content": b'This is episode 01 - Seed\n'
             },
             {
                 "file_name": "The.Walking.Dead.S03E01.x264-2HD.[VTV].en.srt",
                 "filename_md5": "3a9d74c55135ef265dda631756fe2c9b",
-                "content_md5": "f8a3624a088f4cf802b6f326822608d1",
-                "dummy_content": "This is the English subtitle for episode 01 - Seed"
+                "content_md5": "2465e893ebf6f4ee10aebd122b0a6135",
+                "dummy_content": b'This is the English subtitle for episode 01 - Seed\n'
             },
             {
                 "file_name": "The.Walking.Dead.S03E01.x264-2HD.[VTV].nl.srt",
                 "filename_md5": "c3c5c7647b971a436587be4b5fcfce24",
-                "content_md5": "0c70138a23a3565bd086f7aa9b468ee2",
-                "dummy_content": "This is the Dutch subtitle for episode 01 - Seed"
+                "content_md5": "71b0119f189dbf51e32cfca7c755baa6",
+                "dummy_content": b'This is the Dutch subtitle for episode 01 - Seed\n'
             },
         ]
     })
@@ -67,8 +67,6 @@ EPISODES = [
 
 
 def create_tmp_dir():
-    print("Creating dir...")
-    print(os.getcwd())
     os.mkdir(TEMP_DIR)
     os.mkdir(TEMP_DIR_EPISODES)
 
@@ -82,7 +80,7 @@ def create_tmp_episodes():
     for __episode in EPISODES:
         for __file in __episode.files:
             tmp_file_path = os.path.join(TEMP_DIR_EPISODES, __file["file_name"])
-            tmp_file = open(tmp_file_path, 'w+')
+            tmp_file = open(tmp_file_path, 'wb')
             tmp_file.write(__file['dummy_content'])
 
 
