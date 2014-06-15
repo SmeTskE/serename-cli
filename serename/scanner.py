@@ -6,9 +6,10 @@ from serename.episode import Episode
 
 class Scanner:
 
-    def __init__(self, directory):
-        self.directory = directory
-        pass
+    def __init__(self, directory=None):
+        self.directory = os.getcwd()
+        if directory is not None:
+            self.directory = directory
 
     @staticmethod
     def get_file_hash(filename):
@@ -19,8 +20,6 @@ class Scanner:
                 md5.update(chunk)
             result = md5.hexdigest()
         return result
-
-
 
     @staticmethod
     def get_filename_hash(file_name):
@@ -38,8 +37,9 @@ class Scanner:
                 filename = f[0:-4]
         return filename
 
-    def get_files(self):
-        return os.listdir(self.directory)
+    def generate_xml(self):
+        __episodes = self.get_episodes()
+        print(__episodes)
 
     def get_episodes(self):
         file_names = self.get_files()
@@ -57,3 +57,6 @@ class Scanner:
                 __episode.files.sort()
             episodes[episode_name] = __episode
         return episodes
+
+    def get_files(self):
+        return os.listdir(self.directory)
