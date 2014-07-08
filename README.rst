@@ -1,9 +1,11 @@
 Serename
 --------
-.. image:: https://travis-ci.org/SmeTskE/serename.svg?branch=master
-    :target: https://travis-ci.org/SmeTskE/serename
-.. image:: https://coveralls.io/repos/SmeTskE/serename/badge.png?branch=master
-  :target: https://coveralls.io/r/SmeTskE/serename?branch=master
+.. image:: https://travis-ci.org/SmeTskE/serename-cli.svg?branch=master
+    :target: https://travis-ci.org/SmeTskE/serename-cli
+.. image:: https://coveralls.io/repos/SmeTskE/serename-cli/badge.png
+  :target: https://coveralls.io/r/SmeTskE/serename-cli
+
+
   
 Description
 ===========
