@@ -21,5 +21,8 @@ class Episode:
             if data.get("season_nr") is not None:
                 self.season_nr = data["season_nr"]
 
+    # def __repr__(self):
+    #     return str(self.name) + ' - S' + str(self.season_nr) + 'E' + str(self.episode_nr) + ' - ' + str(self.episode_title)
+
     def __eq__(self, other):
         return self.__dict__ == other.__dict__ and self.files.sort() == other.files.sort()

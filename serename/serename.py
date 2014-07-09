@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-from serename.scanner import Scanner
-import os
+from scanner import Scanner
 
 class Serename:
 

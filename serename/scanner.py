@@ -1,7 +1,8 @@
-from functools import partial
 import hashlib
 import os
-from serename.episode import Episode
+import guessit
+import xml.etree.ElementTree as ET
+from entity.episode import Episode
 
 
 class Scanner:
@@ -15,7 +16,7 @@ class Scanner:
     def get_file_hash(filename):
         result = ""
         md5 = hashlib.md5()
-        with open(filename,'rb') as f:
+        with open(filename, 'rb') as f:
             for chunk in iter(lambda: f.read(md5.block_size), b''):
                 md5.update(chunk)
             result = md5.hexdigest()
@@ -39,7 +40,50 @@ class Scanner:
 
     def generate_xml(self):
         __episodes = self.get_episodes()
-        print(__episodes)
+        __episodes = self.get_metadata(__episodes)
+
+        xml_episodes = ET.Element('episodes')
+        for __episode in __episodes.values():
+            xml_episode = ET.SubElement(xml_episodes, 'episode')
+
+            xml_episode_name = ET.SubElement(xml_episode, 'name')
+            xml_episode_name.text = str(__episode.name)
+
+            xml_episode_season_nr = ET.SubElement(xml_episode, 'season_nr')
+            xml_episode_season_nr.text = str(__episode.season_nr)
+
+            xml_episode_episode_nr = ET.SubElement(xml_episode, 'episode_nr')
+            xml_episode_episode_nr.text = str(__episode.episode_nr)
+
+            xml_episode_episode_title = ET.SubElement(xml_episode, 'episode_title')
+            xml_episode_episode_title.text = str(__episode.episode_title)
+
+            xml_episode_files = ET.SubElement(xml_episode, 'files')
+            for __file in __episode.files:
+                xml_episode_file = ET.SubElement(xml_episode_files, 'file')
+
+                xml_episode_file_name = ET.SubElement(xml_episode_file, "name")
+                xml_episode_file_name.text = __file
+
+                xml_episode_file_hash = ET.SubElement(xml_episode_file, "hash")
+                xml_episode_file_hash.text = self.get_file_hash(__file)
+
+
+        tree = ET.ElementTree(xml_episodes)
+        tree.write('serename.xml', xml_declaration=True, encoding='utf-8', method="xml")
+
+ #       with open('serename.xml', 'w') as f:
+ #           f.write(str(ET.dump(xml_episodes)))
+
+
+    def get_metadata(self, __episodes):
+        for key in __episodes:
+            guessit_result = guessit.guess_file_info(key)
+            __episodes[key].name = guessit_result.get('series', '')
+            __episodes[key].season_nr = guessit_result.get('season', '')
+            __episodes[key].episode_nr = guessit_result.get('episodeNumber', '')
+            __episodes[key].episode_title = guessit_result.get('title', '')
+        return __episodes
 
     def get_episodes(self):
         file_names = self.get_files()
@@ -59,4 +103,9 @@ class Scanner:
         return episodes
 
     def get_files(self):
-        return os.listdir(self.directory)
+        files = os.listdir(self.directory)
+        filtered_files = []
+        for f in files:
+            if f[-4:].lower() in [".avi", ".mp4", ".mkv", ".srt", ".sub"]:
+                filtered_files.append(f)
+        return filtered_files
